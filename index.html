@@ -1,0 +1,54 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch Data</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>User List</h1>
+    </header>
+
+    <main>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Alimagno</th>
+                <th>Peret</th>
+                <th>Van Carlo</th>
+                <th>vanalimagno1102@gmail.com</th>
+                <th>21</th>
+                <th>Male</th>
+                <th>CCST</th>
+            </tr>
+
+            <?php
+                $con = mysqli_connect('localhost', 'root', '', 'sample_db');
+
+                if (!$con) {
+                    die("Connection Failed: ".mysqli_connect_error());
+                }
+
+                $sql = "SELECT * FROM users";
+                $result = mysqli_query($con,$sql);
+
+                if (mysqli_num_rows($result) > 0) {
+                    while ($row =mysqli_fetch_assoc($result)) {
+                        echo "<tr>";
+                        echo "<td>".$row["id"]."</td>";
+                        echo "<td>".$row["Van Carlo P. Alimagno"]."</td>";
+                        echo "<td>".$row["vanalimagno1102@gmail.com"]."</td>";
+                        echo "</tr>";
+                    }
+                } else {
+                    echo "<tr><td colspan='3>No Records Founds</tr></td>";
+                }
+
+                mysqli_close($con);
+            ?>
+
+        </table>
+    </main>
+</body>
+</html>
